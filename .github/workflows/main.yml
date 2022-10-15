@@ -1,7 +1,7 @@
 name: Deploy API, real-time server and frontend
 on:
     push:
-        branches: [master]
+        branches: [main]
     workflow_dispatch:
 jobs:
     deploy:
@@ -16,6 +16,6 @@ jobs:
                   script: |
                       cd /monorepo &&
                       git fetch --all &&
-                      git reset --hard origin/master &&
+                      git reset --hard origin/main &&
                       npm install &&
                       pm2 restart api
