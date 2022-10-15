@@ -90,7 +90,9 @@ onBeforeMount(async () => {
 <template>
   <Section title="Contacts">
     <!-- Search input and create button -->
-    <div class="mb-5 flex items-center justify-between">
+    <div
+      class="flex-re mb-5 flex flex-col-reverse gap-3 md:flex-row md:items-center md:justify-between"
+    >
       <FormKit
         type="text"
         placeholder="Search by name"
@@ -102,9 +104,11 @@ onBeforeMount(async () => {
           ><Icon class="!text-neutral-400">search</Icon></template
         ></FormKit
       >
-      <Button @click="createItem" color="green"
-        ><Icon>add</Icon>Add contact</Button
-      >
+      <div class="flex justify-end">
+        <Button @click="createItem" color="green"
+          ><Icon>add</Icon>Add contact</Button
+        >
+      </div>
     </div>
     <Icon loading v-if="loading"></Icon>
     <!-- List contacts -->
@@ -133,14 +137,16 @@ onBeforeMount(async () => {
           <div>
             <!-- Buttons -->
             <div @click.stop="" class="flex items-center gap-2">
-              <div class="text-xs text-neutral-400">
+              <div class="hidden text-xs text-neutral-400 md:block">
                 Added
                 {{ DateTime.fromJSDate(contact.createdAt).toRelative() }}
               </div>
               <Button @click.stop="updateItem(contact.id)"
                 ><Icon>edit</Icon></Button
               >
-              <Button @click.stop="showDeleteModal(contact.id)" color="red"
+              <Button
+                @click.stop="showDeleteModal(contact.id)"
+                class="!text-red-600"
                 ><Icon>delete</Icon></Button
               >
             </div>

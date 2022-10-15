@@ -26,7 +26,7 @@
         </div>
       </div>
       <!-- Slot -->
-      <div class="p-5 !pb-96 md:p-10"><slot></slot></div>
+      <div class="p-5 !pb-48 md:p-10"><slot></slot></div>
     </div>
   </div>
 </template>
