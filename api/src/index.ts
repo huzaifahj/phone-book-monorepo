@@ -6,11 +6,13 @@ import { t, createContext } from "./trpc/init.js"
 import database from "./modules/database.js"
 
 import { statusRouter } from "./routers/status.js"
+import { contactsRouter } from "./routers/contacts.js"
 
 // Setup tRPC main router
 
 export const appRouter = t.router({
     status: statusRouter,
+    contacts: contactsRouter,
 })
 export type AppRouter = typeof appRouter
 
