@@ -1,0 +1,21 @@
+name: Deploy API, real-time server and frontend
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Execute remote SSH commands
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: root
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  script: |
+                      cd /monorepo &&
+                      git fetch --all &&
+                      git reset --hard origin/main &&
+                      npm install &&
+                      pm2 restart api

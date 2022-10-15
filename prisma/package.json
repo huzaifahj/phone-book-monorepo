@@ -1,0 +1,14 @@
+{
+    "scripts": {
+        "push-generate": "prisma db push --schema schema.prisma && npm run generate",
+        "generate": "prisma generate --schema schema.prisma",
+        "studio": "prisma studio -b none --schema schema.prisma",
+        "prepare": "npm run generate"
+    },
+    "dependencies": {
+        "@prisma/client": "^4.0.0"
+    },
+    "devDependencies": {
+        "prisma": "^4.0.0"
+    }
+}

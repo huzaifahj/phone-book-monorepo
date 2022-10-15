@@ -1,0 +1,85 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "api typecheck",
+            "type": "shell",
+            "command": "cd api && npx tsc --noEmit"
+            // "problemMatcher": {
+            //     "fileLocation": ["relative", "${workspaceFolder}/api"],
+            //     "pattern": {
+            //         "regexp": "^([^\\s].*)[\\(:](\\d+)[,:](\\d+)(?:\\):\\s+|\\s+-\\s+)(error|warning|info)\\s+TS(\\d+)\\s*:\\s*(.*)$",
+            //         "file": 1,
+            //         "line": 2,
+            //         "column": 3,
+            //         "severity": 4,
+            //         "code": 5,
+            //         "message": 6
+            //     }
+            // },
+        },
+        {
+            "label": "frontend typecheck",
+            "type": "shell",
+            "command": "cd frontend && npx vue-tsc --noEmit"
+            // "problemMatcher": {
+            //     "fileLocation": ["relative", "${workspaceFolder}/frontend"],
+            //     "pattern": {
+            //         "regexp": "^([^\\s].*)[\\(:](\\d+)[,:](\\d+)(?:\\):\\s+|\\s+-\\s+)(error|warning|info)\\s+TS(\\d+)\\s*:\\s*(.*)$",
+            //         "file": 1,
+            //         "line": 2,
+            //         "column": 3,
+            //         "severity": 4,
+            //         "code": 5,
+            //         "message": 6
+            //     }
+            // },
+        },
+        {
+            "label": "Typecheck folder",
+            "dependsOn": ["api typecheck", "frontend typecheck"],
+            "problemMatcher": []
+            // "runOptions": { "runOn": "folderOpen" }
+        },
+        {
+            "label": "api dev",
+            "type": "shell",
+            "command": "cd api && npm run dev",
+            "presentation": {
+                "reveal": "always"
+            },
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-i", "-c"]
+                }
+            }
+        },
+        {
+            "label": "frontend dev",
+            "type": "shell",
+            "command": "cd frontend && npm run dev"
+        },
+        {
+            "label": "prisma dev",
+            "type": "shell",
+            "command": "cd prisma && npm run studio",
+            "options": {
+                "shell": {
+                    "executable": "bash",
+                    "args": ["-i", "-c"]
+                }
+            }
+        },
+        {
+            "label": "Dev setup",
+            "dependsOn": ["api dev", "frontend dev", "prisma dev"],
+            "problemMatcher": []
+            // "runOptions": { "runOn": "folderOpen" }
+        }
+    ],
+    "presentation": {
+        "reveal": "never",
+        "panel": "new"
+    }
+}

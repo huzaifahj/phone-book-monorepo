@@ -1,0 +1,31 @@
+{
+    "name": "api",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "tsc-watch --onSuccess 'node dist/index.js'",
+        "prepare": "tsc"
+    },
+    "dependencies": {
+        "@fastify/cors": "^8.1.0",
+        "@trpc/server": "^10.0.0-proxy-alpha.72",
+        "@types/luxon": "^3.0.1",
+        "abort-controller": "^3.0.0",
+        "colors": "^1.4.0",
+        "fastify": "^4.5.3",
+        "luxon": "^3.0.3",
+        "superjson": "^1.9.1"
+    },
+    "alias": {
+        "scheduler/tracing": "../../node_modules/scheduler/tracing-profiling"
+    },
+    "devDependencies": {
+        "@types/node": "^18.7.15",
+        "tsc-watch": "^5.0.3",
+        "typescript": "4.8.2"
+    },
+    "publishConfig": {
+        "access": "restricted"
+    },
+    "type": "module"
+}
