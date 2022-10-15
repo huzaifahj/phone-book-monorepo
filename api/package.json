@@ -12,7 +12,7 @@
         "@types/luxon": "^3.0.1",
         "abort-controller": "^3.0.0",
         "colors": "^1.4.0",
-        "fastify": "^4.5.3",
+        "fastify": "^4.8.1",
         "luxon": "^3.0.3",
         "superjson": "^1.9.1"
     },
