@@ -1,4 +1,4 @@
-name: Deploy API, real-time server and frontend
+name: Deploy API
 on:
     push:
         branches: [main]
@@ -14,8 +14,8 @@ jobs:
                   username: root
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
                   script: |
-                      cd /monorepo &&
+                      cd /phone-book-monorepo &&
                       git fetch --all &&
                       git reset --hard origin/main &&
                       npm install &&
-                      pm2 restart api
+                      pm2 restart phone-book-api
