@@ -6,7 +6,7 @@ let url: string
 if (import.meta.env.DEV) {
   url = "http://localhost:5190"
 } else {
-  url = "api.phone-book.jearally.com"
+  url = "https://api.phone-book.jearally.com"
 }
 
 let token: string | undefined
