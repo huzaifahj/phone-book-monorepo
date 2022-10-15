@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Button: typeof import('./src/components/Button.vue')['default']
     Confirm: typeof import('./src/components/Confirm.vue')['default']
+    CreateUpdateContact: typeof import('./src/components/CreateUpdateContact.vue')['default']
     DashboardLayout: typeof import('./src/components/DashboardLayout.vue')['default']
     Divider: typeof import('./src/components/Divider.vue')['default']
     Icon: typeof import('./src/components/Icon.vue')['default']
