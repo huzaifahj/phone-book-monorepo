@@ -1,4 +1,4 @@
-name: Deploy API
+name: Deploy API and frontend
 on:
     push:
         branches: [main]
