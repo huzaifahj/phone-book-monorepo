@@ -8,12 +8,13 @@ import Fuse from "fuse.js"
 let loading = $ref(false)
 
 // Get contacts
-type Contacts = Awaited<ReturnType<typeof t.contacts.getAll.query>>["contacts"]
-let contacts = $ref<Contacts>([])
-async function getContacts() {
+type Items = Awaited<ReturnType<typeof t.contacts.getAll.query>>["contacts"]
+let items = $ref<Items>([])
+async function getItems() {
+  showCreateUpdateModal = false
   try {
     loading = true
-    contacts = (await t.contacts.getAll.query()).contacts
+    items = (await t.contacts.getAll.query()).contacts
   } catch (error) {
     toast.error(error)
   } finally {
@@ -28,8 +29,8 @@ function callNumber(number: string) {
 
 // Search functionality
 let query = $ref("")
-const filteredContacts = $computed(() => {
-  let array = contacts
+const filteredItems = $computed(() => {
+  let array = items
   if (query) {
     const fuse = new Fuse(array, {
       keys: ["firstName", "lastName"],
@@ -45,8 +46,44 @@ const filteredContacts = $computed(() => {
   return array
 })
 
+// Edit functionality
+let editingItemId = $ref<string | undefined>()
+let showCreateUpdateModal = $ref(false)
+function createItem() {
+  showCreateUpdateModal = true
+  editingItemId = undefined
+}
+function updateItem(itemId: string) {
+  showCreateUpdateModal = true
+  editingItemId = itemId
+}
+
+// Delete functionality
+let showConfirmDelete = $ref(false)
+let deletingItemId = $ref<string | undefined>()
+function showDeleteModal(itemId: string) {
+  deletingItemId = itemId
+  showConfirmDelete = true
+}
+async function deleteItem() {
+  if (!deletingItemId) return
+  try {
+    loading = true
+    await t.contacts.delete.mutate({
+      id: deletingItemId,
+    })
+    await getItems()
+    showConfirmDelete = false
+    deletingItemId = undefined
+  } catch (error) {
+    toast.error(error)
+  } finally {
+    loading = false
+  }
+}
+
 onBeforeMount(async () => {
-  await getContacts()
+  await getItems()
 })
 </script>
 
@@ -65,14 +102,16 @@ onBeforeMount(async () => {
           ><Icon class="!text-neutral-400">search</Icon></template
         ></FormKit
       >
-      <Button color="green"><Icon>add</Icon>Add contact</Button>
+      <Button @click="createItem" color="green"
+        ><Icon>add</Icon>Add contact</Button
+      >
     </div>
     <Icon loading v-if="loading"></Icon>
     <!-- List contacts -->
     <div v-else>
-      <div v-if="filteredContacts.length" class="flex flex-col gap-3">
+      <div v-if="filteredItems.length" class="flex flex-col gap-3">
         <div
-          v-for="contact in filteredContacts"
+          v-for="contact in filteredItems"
           @click="callNumber(contact.phoneNumber)"
           class="flex cursor-pointer items-center justify-between rounded-lg border p-3 hover:bg-neutral-50"
         >
@@ -98,8 +137,12 @@ onBeforeMount(async () => {
                 Added
                 {{ DateTime.fromJSDate(contact.createdAt).toRelative() }}
               </div>
-              <Button @click.stop=""><Icon>edit</Icon></Button>
-              <Button @click.stop="" color="red"><Icon>delete</Icon></Button>
+              <Button @click.stop="updateItem(contact.id)"
+                ><Icon>edit</Icon></Button
+              >
+              <Button @click.stop="showDeleteModal(contact.id)" color="red"
+                ><Icon>delete</Icon></Button
+              >
             </div>
           </div>
         </div>
@@ -107,4 +150,12 @@ onBeforeMount(async () => {
       <div v-else class="font-bold">No contacts found.</div>
     </div>
   </Section>
+  <Modal title="Manage contacts" v-model:show="showCreateUpdateModal">
+    <CreateUpdateContact :item-id="editingItemId" @complete="getItems"
+  /></Modal>
+  <Confirm
+    v-model:show="showConfirmDelete"
+    @confirm="deleteItem"
+    text="Are you sure you want to delete this contact?"
+  />
 </template>
