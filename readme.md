@@ -3,7 +3,7 @@
 ## How to access the app
 
 - Visit https://phone-book.jearally.com
-- API is accessible at https://api.phone-book.jearally.com
+- API is accessible at https://api.phone-book.jearally.com/status.get
 
 ## How to run the app
 
