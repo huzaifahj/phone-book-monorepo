@@ -1,0 +1,2 @@
+- Standalone HTTP-server + WebSocket
+- Vanilla `TRPCClient` in node

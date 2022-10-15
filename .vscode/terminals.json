@@ -1,0 +1,17 @@
+{
+    "terminals": [
+        {
+            "name": "API",
+            "commands": ["cd api", "npm run dev"],
+            "open": true
+        },
+        {
+            "name": "Frontend",
+            "commands": ["cd frontend", "npm run dev"]
+        },
+        {
+            "name": "Prisma",
+            "commands": ["cd prisma", "npm run studio"]
+        }
+    ]
+}
