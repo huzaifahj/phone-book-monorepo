@@ -14,9 +14,10 @@
             class="flex w-fit cursor-pointer items-center gap-3 font-semibold"
           >
             <!-- Logo -->
-            <div
-              class="h-12 w-12 rounded-full bg-neutral-100 bg-cover dark:ring-neutral-900"
-            />
+            <Icon
+              class="flex h-12 w-12 items-center justify-center rounded-full bg-neutral-900 !text-3xl text-white"
+              >contacts</Icon
+            >
             <!-- Title -->
             <div class="overflow-auto whitespace-nowrap text-2xl">
               Phone Book App
