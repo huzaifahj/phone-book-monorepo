@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="min-h-screen text-neutral-900">
+  <div class="min-h-screen bg-white text-neutral-900">
     <DashboardLayout>
       <RouterView />
     </DashboardLayout>
